@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdg0cufj5kjcn"]
+
+[ext_resource type="Script" path="res://Scripts/Debug/DebugLabel.gd" id="1_ngso0"]
+
+[node name="DebugLabel" type="Label"]
+offset_left = -8.635
+offset_top = -22.47
+offset_right = 3689.36
+offset_bottom = 2701.53
+scale = Vector2(0.005, 0.005)
+theme_override_font_sizes/font_size = 2000
+text = "Walking"
+horizontal_alignment = 2
+script = ExtResource("1_ngso0")
