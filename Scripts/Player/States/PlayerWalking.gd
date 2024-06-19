@@ -21,20 +21,20 @@ func Update(_delta):
 	
 	moveDirection = moveDirection.normalized()
 	state_machine.directionAxis = moveDirection
-	if Input.is_action_pressed("roll"):
+	if Input.is_action_just_pressed("roll"):
 		Transition("Rolling")
-		return
 
-	if moveDirection == Vector2.ZERO:
+	elif Input.is_action_just_pressed("attack"):
+		Transition("Attacking")
+
+	elif moveDirection == Vector2.ZERO:
 		Transition("Idle")
-		return
+	else:
+		moveDirection = moveDirection * speed
+		var animationString = determine_animation(moveDirection)
+		animation.play(animationString)
 
-
-	moveDirection = moveDirection * speed
-	var animationString = determine_animation(moveDirection)
-	animation.play(animationString)
-
-	PlayerNode.position += moveDirection * _delta
+		PlayerNode.position += moveDirection * _delta
 
 func Exit():
 	animation.stop()

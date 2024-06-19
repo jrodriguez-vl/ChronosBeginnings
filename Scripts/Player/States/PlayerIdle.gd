@@ -11,4 +11,8 @@ func Enter():
 func Update(_delta: float):
 	if Input.get_vector("move_left", "move_right", "move_up", "move_down"):
 		Transition("Walking")
+	elif Input.is_action_just_pressed("roll"):
+		Transition("Rolling")
+	elif Input.is_action_just_pressed("attack"):
+		Transition("Attacking")
 	
