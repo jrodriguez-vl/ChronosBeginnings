@@ -13,5 +13,5 @@ func Update(delta):
 	if(!animation.is_playing()):
 		Transition("Idle")
 		return
-	PlayerNode.position += get_parent().directionAxis * rollSpeed * delta
+	parentNode.position += get_parent().directionAxis * rollSpeed * delta
 

@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://b347jeqpwa8j3"]
+
+[ext_resource type="Texture2D" uid="uid://dxkolsbb7sskh" path="res://Sprites/enemies/green_blob.png" id="1_ribix"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyStateMachine.gd" id="2_mxisw"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPatrolling.gd" id="2_ytmjp"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyChasing.gd" id="4_gqwck"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wtjl2"]
+atlas = ExtResource("1_ribix")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ckb22"]
+atlas = ExtResource("1_ribix")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p5tep"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wtjl2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ckb22")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="Blob" type="Area2D"]
+position = Vector2(263, 134)
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_p5tep")
+animation = &"move"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parentNode")]
+script = ExtResource("2_mxisw")
+initial_state = NodePath("Chasing")
+parentNode = NodePath("..")
+
+[node name="Patrolling" type="Node" parent="StateMachine"]
+script = ExtResource("2_ytmjp")
+speed = Vector2(15, 30)
+
+[node name="Chasing" type="Node" parent="StateMachine"]
+script = ExtResource("4_gqwck")
+chaseSpeed = 20

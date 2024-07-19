@@ -510,10 +510,10 @@ rotation = -3.14159
 scale = Vector2(1.27052, -2.51439)
 shape = SubResource("RectangleShape2D_rl0cx")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("PlayerNode", "initial_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parentNode")]
 script = ExtResource("10_qa48d")
-PlayerNode = NodePath("..")
 initial_state = NodePath("Idle")
+parentNode = NodePath("..")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("10_4u0bl")

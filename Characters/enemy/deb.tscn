@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://2fgdyfd34oql"]
+
+[ext_resource type="Texture2D" uid="uid://hy7bpr670jts" path="res://Sprites/enemies/deb.png" id="1_as2d0"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyStateMachine.gd" id="2_tg41l"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPatrolling.gd" id="3_axhbm"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyChasing.gd" id="4_86hxj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yu1kh"]
+atlas = ExtResource("1_as2d0")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vgub"]
+atlas = ExtResource("1_as2d0")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vss6t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yu1kh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vgub")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[node name="Deb" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vss6t")
+animation = &"move"
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parentNode")]
+script = ExtResource("2_tg41l")
+initial_state = NodePath("Patrolling")
+parentNode = NodePath("..")
+
+[node name="Patrolling" type="Node" parent="StateMachine"]
+script = ExtResource("3_axhbm")
+speed = Vector2(20, 30)
+
+[node name="Chasing" type="Node" parent="StateMachine"]
+script = ExtResource("4_86hxj")
+chaseSpeed = 25

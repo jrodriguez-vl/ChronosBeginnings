@@ -1,0 +1,47 @@
+[gd_scene load_steps=8 format=3 uid="uid://dvww576l6vqfw"]
+
+[ext_resource type="Texture2D" uid="uid://c7niw71gyktqr" path="res://Sprites/enemies/madi.png" id="1_uhyfb"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyStateMachine.gd" id="2_1neyw"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPatrolling.gd" id="3_6px8w"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyChasing.gd" id="4_6d5pb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f5ouj"]
+atlas = ExtResource("1_uhyfb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsx4h"]
+atlas = ExtResource("1_uhyfb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sd3r7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f5ouj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsx4h")
+}],
+"loop": true,
+"name": &"move",
+"speed": 10.0
+}]
+
+[node name="Madi" type="Area2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sd3r7")
+animation = &"move"
+frame_progress = 0.559348
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parentNode")]
+script = ExtResource("2_1neyw")
+initial_state = NodePath("Patrolling")
+parentNode = NodePath("..")
+
+[node name="Patrolling" type="Node" parent="StateMachine"]
+script = ExtResource("3_6px8w")
+
+[node name="Chasing" type="Node" parent="StateMachine"]
+script = ExtResource("4_6d5pb")
+chaseSpeed = 40

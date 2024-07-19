@@ -34,7 +34,7 @@ func Update(_delta):
 		var animationString = determine_animation(moveDirection)
 		animation.play(animationString)
 
-		PlayerNode.position += moveDirection * _delta
+		parentNode.position += moveDirection * _delta
 
 func Exit():
 	animation.stop()

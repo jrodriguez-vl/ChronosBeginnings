@@ -2,6 +2,7 @@ extends Node
 class_name StateMachine
 
 @export var initial_state : State
+@export var parentNode : Node2D
 
 var current_state: State
 var states: Dictionary = {}
