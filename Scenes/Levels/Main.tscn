@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfxsvv1pkepsu"]
+
+[ext_resource type="PackedScene" uid="uid://bix4yxrfu236h" path="res://Scenes/Characters/Player.tscn" id="1_w2wdk"]
+[ext_resource type="Script" path="res://Scenes/Levels/Main.gd" id="1_ykx0l"]
+[ext_resource type="PackedScene" uid="uid://c0coou77q7o5u" path="res://Scenes/Characters/Mob.tscn" id="2_45xkd"]
+[ext_resource type="PackedScene" uid="uid://b347jeqpwa8j3" path="res://Scenes/Characters/enemy/blob.tscn" id="4_npncp"]
+[ext_resource type="PackedScene" uid="uid://2fgdyfd34oql" path="res://Scenes/Characters/enemy/deb.tscn" id="5_rxwl6"]
+[ext_resource type="PackedScene" uid="uid://dvww576l6vqfw" path="res://Scenes/Characters/enemy/madi.tscn" id="6_yxfq6"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_ykx0l")
+mob_scene = ExtResource("2_45xkd")
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(324, 167)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(213, 83)
+offset = Vector2(100, 100)
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("1_w2wdk")]
+
+[node name="Blob" parent="." instance=ExtResource("4_npncp")]
+position = Vector2(205, 111)
+
+[node name="Deb" parent="." instance=ExtResource("5_rxwl6")]
+position = Vector2(382, 127)
+
+[node name="Madi" parent="." instance=ExtResource("6_yxfq6")]
+position = Vector2(297, 93)

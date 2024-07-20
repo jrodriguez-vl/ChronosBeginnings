@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc5s2rds4pscs"]
+
+[ext_resource type="Texture2D" uid="uid://u3i0fqjp7xh4" path="res://Sprites/weapon/bigolsword3.png" id="1_13ovx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5js0"]
+size = Vector2(6.63, 19.285)
+
+[node name="Sword" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 13)
+texture = ExtResource("1_13ovx")
+offset = Vector2(0, -13)
+
+[node name="SwordBox" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/SwordBox"]
+position = Vector2(0, -16.395)
+shape = SubResource("RectangleShape2D_q5js0")
