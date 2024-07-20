@@ -15,5 +15,4 @@ func _process(delta):
 	pass
 
 func die():
-	print("supposed to queue free")
 	queue_free()

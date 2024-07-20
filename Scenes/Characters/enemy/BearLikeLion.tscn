@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://b3imk40ub86cv"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/BaseEnemy.gd" id="1_dkbct"]
+[ext_resource type="Texture2D" uid="uid://dntyrpcegt4ho" path="res://Sprites/enemies/bear_like_lion.png" id="2_cppgk"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="2_tog4x"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPatrolling.gd" id="3_dybju"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyChasing.gd" id="4_yc0s8"]
+[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="5_jhcgi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4843w"]
+atlas = ExtResource("2_cppgk")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhntl"]
+atlas = ExtResource("2_cppgk")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rwt8l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4843w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhntl")
+}],
+"loop": true,
+"name": &"move",
+"speed": 3.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5c5hl"]
+size = Vector2(15.605, 28.14)
+
+[node name="BaseEnemy" type="Node2D"]
+script = ExtResource("1_dkbct")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rwt8l")
+animation = &"move"
+frame_progress = 0.0149926
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_tog4x")
+initial_state = NodePath("EnemyPatrolling")
+
+[node name="EnemyPatrolling" type="Node" parent="StateMachine"]
+script = ExtResource("3_dybju")
+
+[node name="EnemyChasing" type="Node" parent="StateMachine"]
+script = ExtResource("4_yc0s8")
+chaseSpeed = 35
+
+[node name="HealthComponent" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("5_jhcgi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_5c5hl")

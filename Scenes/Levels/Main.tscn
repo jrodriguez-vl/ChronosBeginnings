@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dfxsvv1pkepsu"]
+[gd_scene load_steps=8 format=3 uid="uid://dfxsvv1pkepsu"]
 
 [ext_resource type="PackedScene" uid="uid://bix4yxrfu236h" path="res://Scenes/Characters/Player.tscn" id="1_w2wdk"]
 [ext_resource type="Script" path="res://Scenes/Levels/Main.gd" id="1_ykx0l"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b347jeqpwa8j3" path="res://Scenes/Characters/enemy/blob.tscn" id="4_npncp"]
 [ext_resource type="PackedScene" uid="uid://3ui4xh3b17kr" path="res://Scenes/Characters/enemy/Deb.tscn" id="5_wr4yp"]
 [ext_resource type="PackedScene" uid="uid://b0q8u48mre6h5" path="res://Scenes/Characters/enemy/Madi.tscn" id="6_82hns"]
+[ext_resource type="PackedScene" uid="uid://b3imk40ub86cv" path="res://Scenes/Characters/enemy/BearLikeLion.tscn" id="7_kylgo"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ykx0l")
@@ -28,3 +29,6 @@ position = Vector2(388, 61)
 
 [node name="BaseEnemy2" parent="." instance=ExtResource("6_82hns")]
 position = Vector2(251, 201)
+
+[node name="BaseEnemy3" parent="." instance=ExtResource("7_kylgo")]
+position = Vector2(445, 122)
