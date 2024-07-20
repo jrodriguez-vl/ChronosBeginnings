@@ -532,4 +532,3 @@ rollSpeed = 110
 
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("19_5dowv")
-weaponOffset = 5.0
