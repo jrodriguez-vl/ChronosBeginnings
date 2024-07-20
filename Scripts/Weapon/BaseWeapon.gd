@@ -5,6 +5,7 @@ class_name BaseWeapon
 @export var swingSpeed: float = 800
 @export var weaponOrigin: Vector2 =  Vector2(0, -8)
 @export var weaponOffset: float = 4
+@export var weaponDamage: float = 5
 
 var weaponSprite: Sprite2D
 
@@ -40,3 +41,8 @@ func SwingWeapon(delta):
 func ToggleWeapon(isActive: bool):
 	weaponSprite.visible = isActive
 	get_node("Sprite2D/SwordBox/CollisionShape2D").disabled = !isActive
+
+
+func _on_sword_box_area_entered(area):
+	if area is HealthComponent:
+		area.TakeDamage(weaponDamage)

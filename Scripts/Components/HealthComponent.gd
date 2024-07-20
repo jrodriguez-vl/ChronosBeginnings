@@ -1,4 +1,4 @@
-extends Node2D
+extends Area2D
 class_name HealthComponent
 
 signal Died
@@ -13,13 +13,11 @@ func _ready():
 func _process(delta):
 	pass
 
-
 func TakeDamage(dmg: float):
 	if health == 0:
 		return
 
 	health = clampf(health - dmg, 0, health)
-	print("Took dmg: ", dmg, ", total health:", health)
 
 	if(health == 0):
 		Died.emit()

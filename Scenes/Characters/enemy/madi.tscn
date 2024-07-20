@@ -1,47 +1,62 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvww576l6vqfw"]
+[gd_scene load_steps=11 format=3 uid="uid://b0q8u48mre6h5"]
 
-[ext_resource type="Texture2D" uid="uid://c7niw71gyktqr" path="res://Sprites/enemies/madi.png" id="1_uhyfb"]
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyStateMachine.gd" id="2_1neyw"]
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPatrolling.gd" id="3_6px8w"]
-[ext_resource type="Script" path="res://Scripts/Enemy/EnemyChasing.gd" id="4_6d5pb"]
+[ext_resource type="Script" path="res://Scripts/Enemy/BaseEnemy.gd" id="1_hv8sg"]
+[ext_resource type="Texture2D" uid="uid://c7niw71gyktqr" path="res://Sprites/enemies/madi.png" id="2_g82ju"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="2_m4vhi"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPatrolling.gd" id="3_18ax5"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyChasing.gd" id="4_qcpbg"]
+[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="5_hxk1h"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_f5ouj"]
-atlas = ExtResource("1_uhyfb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpalx"]
+atlas = ExtResource("2_g82ju")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tsx4h"]
-atlas = ExtResource("1_uhyfb")
+[sub_resource type="AtlasTexture" id="AtlasTexture_gk6oc"]
+atlas = ExtResource("2_g82ju")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_sd3r7"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_yidro"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_f5ouj")
+"texture": SubResource("AtlasTexture_xpalx")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tsx4h")
+"texture": SubResource("AtlasTexture_gk6oc")
 }],
 "loop": true,
 "name": &"move",
-"speed": 10.0
+"speed": 5.0
 }]
 
-[node name="Madi" type="Area2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mmdp"]
+size = Vector2(23, 13)
+
+[node name="Madi" type="Node2D"]
+script = ExtResource("1_hv8sg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_sd3r7")
+sprite_frames = SubResource("SpriteFrames_yidro")
 animation = &"move"
-frame_progress = 0.559348
+frame_progress = 0.0182459
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parentNode")]
-script = ExtResource("2_1neyw")
-initial_state = NodePath("Patrolling")
-parentNode = NodePath("..")
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_m4vhi")
+initial_state = NodePath("EnemyPatrolling")
 
-[node name="Patrolling" type="Node" parent="StateMachine"]
-script = ExtResource("3_6px8w")
+[node name="EnemyPatrolling" type="Node" parent="StateMachine"]
+script = ExtResource("3_18ax5")
+speed = Vector2(10, 30)
 
-[node name="Chasing" type="Node" parent="StateMachine"]
-script = ExtResource("4_6d5pb")
-chaseSpeed = 40
+[node name="EnemyChasing" type="Node" parent="StateMachine"]
+script = ExtResource("4_qcpbg")
+chaseSpeed = 30
+
+[node name="HealthComponent" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("5_hxk1h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
+position = Vector2(0.5, -1.5)
+shape = SubResource("RectangleShape2D_2mmdp")

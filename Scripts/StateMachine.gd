@@ -2,12 +2,13 @@ extends Node
 class_name StateMachine
 
 @export var initial_state : State
-@export var parentNode : Node2D
 
 var current_state: State
 var states: Dictionary = {}
+var parentNode : Node2D
 
 func _ready():
+	parentNode = get_parent()
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child

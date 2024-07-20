@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://dek3108d8jbg6"]
+
+[ext_resource type="Script" path="res://Scripts/Enemy/BaseEnemy.gd" id="1_3jw06"]
+[ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="2_w0mtv"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyPatrolling.gd" id="3_f1f4u"]
+[ext_resource type="Script" path="res://Scripts/Enemy/EnemyChasing.gd" id="4_wemj4"]
+[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="5_ely0g"]
+
+[node name="BaseEnemy" type="Node2D"]
+script = ExtResource("1_3jw06")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_w0mtv")
+initial_state = NodePath("EnemyPatrolling")
+
+[node name="EnemyPatrolling" type="Node" parent="StateMachine"]
+script = ExtResource("3_f1f4u")
+
+[node name="EnemyChasing" type="Node" parent="StateMachine"]
+script = ExtResource("4_wemj4")
+
+[node name="HealthComponent" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("5_ely0g")

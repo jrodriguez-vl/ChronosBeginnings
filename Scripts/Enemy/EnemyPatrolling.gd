@@ -1,4 +1,5 @@
 extends State
+class_name EnemyPatrolling
 
 @export var speed = Vector2(10,20)
 @export var secondsToAdjustPatrolRoute: int = 2
@@ -25,12 +26,13 @@ func patrol(_delta):
 
 	var distance = parentNode.position.distance_to(target.position)
 	if(distance < 100):
-		Transition("Chasing")
+		print("begin chase")
+		Transition("EnemyChasing")
 		return
 
 	#will need to flip animation if x < 0
 	var moveDirection = Vector2(xMov, yMov)
-	determineAnimationFLip()
+	determineAnimationFlip()
 	parentNode.position += moveDirection * moveSpeed * _delta
 	secondsSinceLastCalibration += _delta
 
@@ -40,5 +42,5 @@ func recalibrateRoute():
 	yMov = randf_range(-1,1)
 	moveSpeed = randf_range(speed.x, speed.y)
 
-func determineAnimationFLip():
+func determineAnimationFlip():
 	animation.flip_h = xMov < 0

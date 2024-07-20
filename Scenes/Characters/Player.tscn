@@ -515,10 +515,9 @@ collision_mask = 13
 position = Vector2(0, 3.29)
 shape = SubResource("RectangleShape2D_rl0cx")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parentNode")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("10_qa48d")
 initial_state = NodePath("Idle")
-parentNode = NodePath("..")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource("10_4u0bl")

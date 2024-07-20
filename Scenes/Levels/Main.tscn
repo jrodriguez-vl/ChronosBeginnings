@@ -4,8 +4,8 @@
 [ext_resource type="Script" path="res://Scenes/Levels/Main.gd" id="1_ykx0l"]
 [ext_resource type="PackedScene" uid="uid://c0coou77q7o5u" path="res://Scenes/Characters/Mob.tscn" id="2_45xkd"]
 [ext_resource type="PackedScene" uid="uid://b347jeqpwa8j3" path="res://Scenes/Characters/enemy/blob.tscn" id="4_npncp"]
-[ext_resource type="PackedScene" uid="uid://2fgdyfd34oql" path="res://Scenes/Characters/enemy/deb.tscn" id="5_rxwl6"]
-[ext_resource type="PackedScene" uid="uid://dvww576l6vqfw" path="res://Scenes/Characters/enemy/madi.tscn" id="6_yxfq6"]
+[ext_resource type="PackedScene" uid="uid://3ui4xh3b17kr" path="res://Scenes/Characters/enemy/Deb.tscn" id="5_wr4yp"]
+[ext_resource type="PackedScene" uid="uid://b0q8u48mre6h5" path="res://Scenes/Characters/enemy/Madi.tscn" id="6_82hns"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_ykx0l")
@@ -23,8 +23,8 @@ offset = Vector2(100, 100)
 [node name="Blob" parent="." instance=ExtResource("4_npncp")]
 position = Vector2(205, 111)
 
-[node name="Deb" parent="." instance=ExtResource("5_rxwl6")]
-position = Vector2(382, 127)
+[node name="BaseEnemy" parent="." instance=ExtResource("5_wr4yp")]
+position = Vector2(388, 61)
 
-[node name="Madi" parent="." instance=ExtResource("6_yxfq6")]
-position = Vector2(297, 93)
+[node name="BaseEnemy2" parent="." instance=ExtResource("6_82hns")]
+position = Vector2(251, 201)

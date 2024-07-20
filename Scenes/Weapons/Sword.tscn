@@ -21,3 +21,6 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/SwordBox"]
 position = Vector2(0, -16.395)
 shape = SubResource("RectangleShape2D_q5js0")
+
+[connection signal="area_entered" from="Sprite2D/SwordBox" to="." method="_on_sword_box_area_entered"]
+[connection signal="body_entered" from="Sprite2D/SwordBox" to="." method="_on_sword_box_body_entered"]

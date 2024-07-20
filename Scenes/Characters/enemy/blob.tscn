@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b347jeqpwa8j3"]
+[gd_scene load_steps=11 format=3 uid="uid://b347jeqpwa8j3"]
 
+[ext_resource type="Script" path="res://Scripts/Enemy/BaseEnemy.gd" id="1_52k7i"]
 [ext_resource type="Texture2D" uid="uid://dxkolsbb7sskh" path="res://Sprites/enemies/green_blob.png" id="1_ribix"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyStateMachine.gd" id="2_ihtkj"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyPatrolling.gd" id="3_wo4u4"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyChasing.gd" id="4_ijy1c"]
-[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="5_6tyko"]
+[ext_resource type="PackedScene" uid="uid://cj6jk8ekv8gdn" path="res://Scenes/Components/HurtBox.tscn" id="6_8xfcg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wtjl2"]
 atlas = ExtResource("1_ribix")
@@ -28,23 +29,21 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_728tf"]
-size = Vector2(19.69, 17.125)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mfjr"]
+size = Vector2(20, 16.595)
 
-[node name="Blob" type="Area2D"]
+[node name="Blob" type="Node2D"]
 position = Vector2(263, 134)
-collision_layer = 8
-collision_mask = 5
+script = ExtResource("1_52k7i")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_p5tep")
 animation = &"move"
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parentNode")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_ihtkj")
 initial_state = NodePath("Chasing")
-parentNode = NodePath("..")
 
 [node name="Patrolling" type="Node" parent="StateMachine"]
 script = ExtResource("3_wo4u4")
@@ -54,9 +53,8 @@ speed = Vector2(15, 30)
 script = ExtResource("4_ijy1c")
 chaseSpeed = 20
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 5.855)
-shape = SubResource("RectangleShape2D_728tf")
+[node name="HurtBox" parent="." instance=ExtResource("6_8xfcg")]
 
-[node name="HealthComponent" type="Node2D" parent="."]
-script = ExtResource("5_6tyko")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(1, 5)
+shape = SubResource("RectangleShape2D_4mfjr")
