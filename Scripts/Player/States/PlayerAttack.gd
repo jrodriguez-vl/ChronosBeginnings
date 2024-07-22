@@ -9,6 +9,7 @@ func Enter():
 	direction = get_parent().direction
 	var animatedSprite = "attack_" + direction
 	weapon.SetWeaponTransform(direction)
+	weapon.swingAxis = get_parent().directionAxis
 	weapon.ToggleWeapon(true)
 
 	animation.play(animatedSprite)

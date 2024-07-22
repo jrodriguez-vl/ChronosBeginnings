@@ -1,4 +1,4 @@
 extends StateMachine
 
 var direction = "down"
-var directionAxis = Vector2.ZERO
+var directionAxis = Vector2.RIGHT

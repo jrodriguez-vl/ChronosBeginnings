@@ -6,8 +6,10 @@ class_name BaseWeapon
 @export var weaponOrigin: Vector2 =  Vector2(0, -8)
 @export var weaponOffset: float = 4
 @export var weaponDamage: float = 5
+@export var knockbackForce: float = 200
 
 var weaponSprite: Sprite2D
+var swingAxis: Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -45,4 +47,4 @@ func ToggleWeapon(isActive: bool):
 
 func _on_sword_box_area_entered(area):
 	if area is HealthComponent:
-		area.TakeDamage(weaponDamage)
+		area.TakeDamage(weaponDamage, knockbackForce, swingAxis)

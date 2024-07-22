@@ -19,8 +19,11 @@ func Update(_delta):
 		moveDirection.x -= 1
 		state_machine.direction = "left"
 	
+
 	moveDirection = moveDirection.normalized()
-	state_machine.directionAxis = moveDirection
+	if(moveDirection != Vector2.ZERO):
+		state_machine.directionAxis = moveDirection
+
 	if Input.is_action_just_pressed("roll"):
 		Transition("Rolling")
 

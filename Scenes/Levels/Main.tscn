@@ -1,11 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dfxsvv1pkepsu"]
+[gd_scene load_steps=5 format=3 uid="uid://dfxsvv1pkepsu"]
 
 [ext_resource type="PackedScene" uid="uid://bix4yxrfu236h" path="res://Scenes/Characters/Player.tscn" id="1_w2wdk"]
 [ext_resource type="Script" path="res://Scenes/Levels/Main.gd" id="1_ykx0l"]
 [ext_resource type="PackedScene" uid="uid://c0coou77q7o5u" path="res://Scenes/Characters/Mob.tscn" id="2_45xkd"]
-[ext_resource type="PackedScene" uid="uid://b347jeqpwa8j3" path="res://Scenes/Characters/enemy/blob.tscn" id="4_npncp"]
-[ext_resource type="PackedScene" uid="uid://3ui4xh3b17kr" path="res://Scenes/Characters/enemy/Deb.tscn" id="5_wr4yp"]
-[ext_resource type="PackedScene" uid="uid://b0q8u48mre6h5" path="res://Scenes/Characters/enemy/Madi.tscn" id="6_82hns"]
 [ext_resource type="PackedScene" uid="uid://b3imk40ub86cv" path="res://Scenes/Characters/enemy/BearLikeLion.tscn" id="7_kylgo"]
 
 [node name="Main" type="Node2D"]
@@ -21,14 +18,23 @@ offset = Vector2(100, 100)
 
 [node name="Player" parent="." groups=["Player"] instance=ExtResource("1_w2wdk")]
 
-[node name="Blob" parent="." instance=ExtResource("4_npncp")]
-position = Vector2(205, 111)
+[node name="BearLikeLion" parent="." instance=ExtResource("7_kylgo")]
+position = Vector2(249, 175)
 
-[node name="BaseEnemy" parent="." instance=ExtResource("5_wr4yp")]
-position = Vector2(388, 61)
+[node name="BearLikeLion2" parent="." instance=ExtResource("7_kylgo")]
+position = Vector2(263, 106)
 
-[node name="BaseEnemy2" parent="." instance=ExtResource("6_82hns")]
-position = Vector2(251, 201)
+[node name="BearLikeLion3" parent="." instance=ExtResource("7_kylgo")]
+position = Vector2(315, 105)
 
-[node name="BaseEnemy3" parent="." instance=ExtResource("7_kylgo")]
-position = Vector2(445, 122)
+[node name="BearLikeLion4" parent="." instance=ExtResource("7_kylgo")]
+position = Vector2(354, 115)
+
+[node name="BearLikeLion5" parent="." instance=ExtResource("7_kylgo")]
+position = Vector2(403, 157)
+
+[node name="BearLikeLion6" parent="." instance=ExtResource("7_kylgo")]
+position = Vector2(374, 204)
+
+[node name="BearLikeLion7" parent="." instance=ExtResource("7_kylgo")]
+position = Vector2(293, 237)

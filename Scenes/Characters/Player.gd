@@ -3,6 +3,8 @@ class_name Player
 
 @export var weapon: Node2D
 
+var movementAxis: Vector2 = Vector2.ZERO
+
 signal hit
 
 const WALK_UP = "walk_up"

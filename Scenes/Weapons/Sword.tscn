@@ -8,6 +8,7 @@ size = Vector2(6.63, 19.285)
 
 [node name="Sword" type="Node2D"]
 script = ExtResource("1_qy6l7")
+knockbackForce = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 13)
