@@ -8,12 +8,13 @@ signal Knockback
 @export var knockbackResistance = 0
 @export var canBeKnockedBack = true
 
-var health : float
+@onready var damageFloaty = preload("res://Scenes/Accessory/DamageNumber.tscn")
+@onready var health : float = MAX_HEALTH
+
 var parent: CharacterBody2D
 
 func _ready():
-	health = MAX_HEALTH
-
+	pass
 
 func _process(delta):
 	pass
@@ -24,6 +25,10 @@ func TakeDamage(dmg: float, knockbackForce: float, knockbackDirection: Vector2):
 
 	health = clampf(health - dmg, 0, health)
 
+	var num = damageFloaty.instantiate()
+	num.SetDamage(dmg)
+	add_child(num)
+	
 	Knockback.emit(knockbackForce, knockbackDirection)
 
 	if(health == 0):
