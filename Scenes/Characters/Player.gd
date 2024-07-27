@@ -1,9 +1,12 @@
-extends Node2D
+extends CharacterBody2D
 class_name Player
 
 @export var weapon: Node2D
+@export var knockbackDamping: float = 1000
+@export var knockbackResistance: float = 0
 
 var movementAxis: Vector2 = Vector2.ZERO
+var currentKnockback: Vector2 = Vector2.ZERO
 
 signal hit
 
@@ -24,3 +27,12 @@ func start(pos):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
+
+func _physics_process(delta):
+	currentKnockback = currentKnockback.move_toward(Vector2.ZERO, knockbackDamping * delta)
+	velocity = currentKnockback
+	move_and_slide()
+
+func _on_hurt_box_knockback(knockbackForce: float, knockbackDirection: Vector2):
+	var force = max(knockbackForce - knockbackResistance, 0)
+	currentKnockback = force * knockbackDirection

@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://bix4yxrfu236h"]
+[gd_scene load_steps=77 format=3 uid="uid://bix4yxrfu236h"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player.gd" id="1_645xq"]
 [ext_resource type="Script" path="res://Scripts/Debug/DebugLabel.gd" id="2_pysoy"]
@@ -19,6 +19,7 @@
 [ext_resource type="Texture2D" uid="uid://cl1wdivqnbyid" path="res://Sprites/character/Character_RollRight.png" id="13_03glj"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerRolling.gd" id="14_wravw"]
 [ext_resource type="Texture2D" uid="uid://bv4ujijmibjyo" path="res://Sprites/character/Character_RollUp.png" id="14_yymdd"]
+[ext_resource type="PackedScene" uid="uid://cj6jk8ekv8gdn" path="res://Scenes/Components/HurtBox.tscn" id="16_wilq4"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerAttack.gd" id="19_5dowv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xulij"]
@@ -480,10 +481,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rl0cx"]
-size = Vector2(8.476, 11.248)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_23qfn"]
+size = Vector2(8.4, 9.715)
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("weapon")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_qmxe6"]
+radius = 6.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon")]
 position = Vector2(112, 65)
 script = ExtResource("1_645xq")
 weapon = NodePath("Sword")
@@ -508,12 +512,13 @@ script = ExtResource("2_pysoy")
 sprite_frames = SubResource("SpriteFrames_pds3t")
 animation = &"idle_up"
 
-[node name="HealthBox" type="Area2D" parent="."]
-collision_mask = 13
+[node name="HurtBox" parent="." instance=ExtResource("16_wilq4")]
+collision_layer = 1
+MAX_HEALTH = 1000.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthBox"]
-position = Vector2(0, 3.29)
-shape = SubResource("RectangleShape2D_rl0cx")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 2.855)
+shape = SubResource("RectangleShape2D_23qfn")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("10_qa48d")
@@ -531,3 +536,9 @@ rollSpeed = 110
 
 [node name="Attacking" type="Node" parent="StateMachine"]
 script = ExtResource("19_5dowv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3.13)
+shape = SubResource("CircleShape2D_qmxe6")
+
+[connection signal="Knockback" from="HurtBox" to="." method="_on_hurt_box_knockback"]

@@ -7,19 +7,27 @@ signal Knockback
 @export var MAX_HEALTH := 10.0
 @export var knockbackResistance = 0
 @export var canBeKnockedBack = true
+@export var invulnerabilityTime: float = .1
 
 @onready var damageFloaty = preload("res://Scenes/Accessory/DamageNumber.tscn")
 @onready var health : float = MAX_HEALTH
 
 var parent: CharacterBody2D
+var invulTimer: Timer
 
 func _ready():
-	pass
+	invulTimer = get_node("InvulTimer")
+	invulTimer.wait_time = invulnerabilityTime
 
 func _process(delta):
 	pass
 
 func TakeDamage(dmg: float, knockbackForce: float, knockbackDirection: Vector2):
+	if !invulTimer.is_stopped():
+		return 
+	
+	invulTimer.start()
+
 	if health == 0:
 		return
 
@@ -34,3 +42,4 @@ func TakeDamage(dmg: float, knockbackForce: float, knockbackDirection: Vector2):
 	if(health == 0):
 		Died.emit()
 	
+
