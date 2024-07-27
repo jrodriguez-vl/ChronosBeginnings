@@ -22,7 +22,6 @@ func _process(delta):
 	pass
 
 
-
 func SetWeaponTransform(direction: String):
 	if direction == "down":
 		position = weaponOrigin + Vector2(0, weaponOffset)
@@ -47,4 +46,5 @@ func ToggleWeapon(isActive: bool):
 
 func _on_sword_box_area_entered(area):
 	if area is HealthComponent:
-		area.TakeDamage(weaponDamage, knockbackForce, swingAxis)
+		var pos = global_position.direction_to(area.global_position)
+		area.TakeDamage(weaponDamage, knockbackForce, pos)

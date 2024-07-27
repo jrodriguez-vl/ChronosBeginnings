@@ -13,4 +13,5 @@ func _process(delta):
 
 func _on_area_entered(area):
 	if area is HealthComponent:
-		area.TakeDamage(damage, knockback, Vector2.LEFT)
+		var pos = global_position.direction_to(area.global_position)
+		area.TakeDamage(damage, knockback, pos)
