@@ -8,6 +8,7 @@ signal Knockback
 @export var knockbackResistance = 0
 @export var canBeKnockedBack = true
 @export var invulnerabilityTime: float = .1
+@export var audio: AudioStreamPlayer2D
 
 @onready var damageFloaty = preload("res://Scenes/Accessory/DamageNumber.tscn")
 @onready var health : float = MAX_HEALTH
@@ -23,6 +24,9 @@ func _process(delta):
 	pass
 
 func TakeDamage(dmg: float, knockbackForce: float, knockbackDirection: Vector2):
+	if audio:
+		audio.play()
+
 	if !invulTimer.is_stopped():
 		return 
 	
@@ -42,4 +46,3 @@ func TakeDamage(dmg: float, knockbackForce: float, knockbackDirection: Vector2):
 	if(health == 0):
 		Died.emit()
 	
-

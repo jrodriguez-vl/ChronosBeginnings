@@ -20,10 +20,6 @@ const ROLL_DOWN = "roll_down"
 const ROLL_LEFT = "roll_left"
 const ROLL_RIGHT = "roll_right"
 
-func start(pos):
-	position = pos
-	show()
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass

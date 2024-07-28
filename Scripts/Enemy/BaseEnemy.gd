@@ -3,6 +3,7 @@ class_name BaseEnemy
 
 @export var knockbackResistance: float = 0
 @export var knockbackDamping: float = 1000
+@export var audio: AudioStreamPlayer2D
 
 var currentKnockback: Vector2 = Vector2.ZERO
 

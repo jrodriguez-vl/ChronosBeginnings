@@ -7,6 +7,7 @@ class_name BaseWeapon
 @export var weaponOffset: float = 4
 @export var weaponDamage: float = 5
 @export var knockbackForce: float = 200
+@export var audio: AudioStreamPlayer2D
 
 var weaponSprite: Sprite2D
 var swingAxis: Vector2 = Vector2.ZERO
@@ -40,6 +41,8 @@ func SwingWeapon(delta):
 	weaponSprite.rotation_degrees -= delta * swingSpeed
 	
 func ToggleWeapon(isActive: bool):
+	if(isActive):
+		audio.play()
 	weaponSprite.visible = isActive
 	get_node("Sprite2D/SwordBox/CollisionShape2D").disabled = !isActive
 

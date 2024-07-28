@@ -487,8 +487,8 @@ size = Vector2(8.4, 9.715)
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmxe6"]
 radius = 6.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon")]
-position = Vector2(112, 65)
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["Player"]]
+collision_mask = 5
 script = ExtResource("1_645xq")
 weapon = NodePath("Sword")
 metadata/_edit_group_ = true

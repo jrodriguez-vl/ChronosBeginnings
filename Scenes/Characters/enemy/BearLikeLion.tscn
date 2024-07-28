@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3imk40ub86cv"]
+[gd_scene load_steps=16 format=3 uid="uid://b3imk40ub86cv"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/BaseEnemy.gd" id="1_dkbct"]
 [ext_resource type="Texture2D" uid="uid://dntyrpcegt4ho" path="res://Sprites/enemies/bear_like_lion.png" id="2_cppgk"]
@@ -7,6 +7,8 @@
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyChasing.gd" id="4_yc0s8"]
 [ext_resource type="PackedScene" uid="uid://cj6jk8ekv8gdn" path="res://Scenes/Components/HurtBox.tscn" id="6_bnpk2"]
 [ext_resource type="Script" path="res://Scripts/Weapon/AuraWeapon.gd" id="7_7ncwl"]
+[ext_resource type="AudioStream" uid="uid://bls6celfvj2xk" path="res://Audio/wetslap.wav" id="8_8andb"]
+[ext_resource type="AudioStream" uid="uid://bkovwefubdmrh" path="res://Audio/cheeksclappin.wav" id="8_ti7ln"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4843w"]
 atlas = ExtResource("2_cppgk")
@@ -73,12 +75,20 @@ script = ExtResource("7_7ncwl")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 shape = SubResource("RectangleShape2D_q0rdh")
 
-[node name="HurtBox" parent="." instance=ExtResource("6_bnpk2")]
+[node name="HurtBox" parent="." node_paths=PackedStringArray("audio") instance=ExtResource("6_bnpk2")]
 collision_layer = 8
 MAX_HEALTH = 100.0
+audio = NodePath("AudioStreamPlayer2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(-1, 3)
 shape = SubResource("CapsuleShape2D_ujdpa")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="HurtBox"]
+stream = ExtResource("8_8andb")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_ti7ln")
+attenuation = 36.7583
 
 [connection signal="area_entered" from="DamageArea" to="DamageArea" method="_on_area_entered"]

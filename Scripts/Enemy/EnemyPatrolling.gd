@@ -9,7 +9,7 @@ var xMov: float
 var yMov: float
 var moveSpeed: float
 var secondsSinceLastCalibration: float
-var target: Player
+@onready var target: Player
 
 func Enter():
 	super()
@@ -21,14 +21,15 @@ func Update(_delta):
 	patrol(_delta)
 
 func patrol(_delta):
+
 	if secondsSinceLastCalibration > secondsToAdjustPatrolRoute:
 		recalibrateRoute()
 
-	var distance = parentNode.position.distance_to(target.position)
-	if(distance < 100):
-		print("begin chase")
-		Transition("EnemyChasing")
-		return
+	if(target):
+		var distance = parentNode.position.distance_to(target.position)
+		if(distance < 100):
+			Transition("EnemyChasing")
+			return
 
 	#will need to flip animation if x < 0
 	var moveDirection = Vector2(xMov, yMov)

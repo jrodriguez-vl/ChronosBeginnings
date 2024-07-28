@@ -26,4 +26,3 @@ func Update(delta):
 	
 	weapon.SwingWeapon(delta)
 	
-

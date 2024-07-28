@@ -4,16 +4,21 @@ class_name EnemyChasing
 @export var chaseSpeed = 1
 
 var target: Player
+@onready var audio: AudioStreamPlayer2D
 
 func Enter():
 	super()
+	audio = parentNode.get_node("AudioStreamPlayer2D")
 	target = get_tree().get_first_node_in_group("Player")
 	animation.play("move")
 
-
 func Update(_delta):
+	if !audio.playing:
+		audio.play()
+
 	if !target:
 		print("no player found")
+		audio.stop()
 		Transition("EnemyPatrolling")
 		return
 
