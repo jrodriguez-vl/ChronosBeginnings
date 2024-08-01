@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://vxoreu8ieiwv"]
+[gd_scene load_steps=8 format=4 uid="uid://vxoreu8ieiwv"]
 
 [ext_resource type="Texture2D" uid="uid://bx8605rqrjslk" path="res://Sprites/tilesets/RF_Catacombs_v1.0/mainlevbuild.png" id="1_yc10p"]
 [ext_resource type="PackedScene" uid="uid://bix4yxrfu236h" path="res://Scenes/Characters/Player.tscn" id="2_okdip"]
 [ext_resource type="PackedScene" uid="uid://b3imk40ub86cv" path="res://Scenes/Characters/enemy/BearLikeLion.tscn" id="3_juff5"]
+[ext_resource type="PackedScene" uid="uid://sbhdd143qb38" path="res://Scenes/Characters/enemy/Madi.tscn" id="4_8nxte"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_blyre"]
 
@@ -1528,3 +1529,12 @@ position = Vector2(127, 235)
 
 [node name="BearLikeLion4" parent="." instance=ExtResource("3_juff5")]
 position = Vector2(499, 183)
+
+[node name="BearLikeLion5" parent="." instance=ExtResource("4_8nxte")]
+position = Vector2(354, 65)
+
+[node name="BearLikeLion6" parent="." instance=ExtResource("4_8nxte")]
+position = Vector2(40, 184)
+
+[node name="BearLikeLion7" parent="." instance=ExtResource("4_8nxte")]
+position = Vector2(-249, 54)

@@ -3,6 +3,7 @@ class_name HealthComponent
 
 signal Died
 signal Knockback
+signal Damaged
 
 @export var MAX_HEALTH := 10.0
 @export var knockbackResistance = 0
@@ -42,6 +43,7 @@ func TakeDamage(dmg: float, knockbackForce: float, knockbackDirection: Vector2):
 	add_child(num)
 	
 	Knockback.emit(knockbackForce, knockbackDirection)
+	Damaged.emit(health)
 
 	if(health == 0):
 		Died.emit()

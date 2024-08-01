@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://bix4yxrfu236h"]
+[gd_scene load_steps=78 format=3 uid="uid://bix4yxrfu236h"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player.gd" id="1_645xq"]
 [ext_resource type="Script" path="res://Scripts/Debug/DebugLabel.gd" id="2_pysoy"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://bv4ujijmibjyo" path="res://Sprites/character/Character_RollUp.png" id="14_yymdd"]
 [ext_resource type="PackedScene" uid="uid://cj6jk8ekv8gdn" path="res://Scenes/Components/HurtBox.tscn" id="16_wilq4"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerAttack.gd" id="19_5dowv"]
+[ext_resource type="PackedScene" uid="uid://buedt2p2ngxpr" path="res://Scenes/GUI/PlayerGUI.tscn" id="22_by1dr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xulij"]
 atlas = ExtResource("3_xeehy")
@@ -540,5 +541,7 @@ script = ExtResource("19_5dowv")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.13)
 shape = SubResource("CircleShape2D_qmxe6")
+
+[node name="PlayerGui" parent="." instance=ExtResource("22_by1dr")]
 
 [connection signal="Knockback" from="HurtBox" to="." method="_on_hurt_box_knockback"]

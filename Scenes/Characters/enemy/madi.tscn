@@ -1,44 +1,114 @@
-[gd_scene load_steps=11 format=3 uid="uid://b0q8u48mre6h5"]
+[gd_scene load_steps=18 format=3 uid="uid://sbhdd143qb38"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/BaseEnemy.gd" id="1_hv8sg"]
 [ext_resource type="Texture2D" uid="uid://c7niw71gyktqr" path="res://Sprites/enemies/madi.png" id="2_g82ju"]
 [ext_resource type="Script" path="res://Scripts/StateMachine.gd" id="2_m4vhi"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyPatrolling.gd" id="3_18ax5"]
 [ext_resource type="Script" path="res://Scripts/Enemy/EnemyChasing.gd" id="4_qcpbg"]
-[ext_resource type="Script" path="res://Scripts/Components/HealthComponent.gd" id="5_hxk1h"]
+[ext_resource type="Script" path="res://Scripts/Weapon/AuraWeapon.gd" id="6_r5ptl"]
+[ext_resource type="PackedScene" uid="uid://cj6jk8ekv8gdn" path="res://Scenes/Components/HurtBox.tscn" id="7_s88um"]
+[ext_resource type="AudioStream" uid="uid://bls6celfvj2xk" path="res://Audio/wetslap.wav" id="8_c1lu5"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xpalx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7eqk"]
 atlas = ExtResource("2_g82ju")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gk6oc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_83oj5"]
 atlas = ExtResource("2_g82ju")
 region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yidro"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_rwt8l"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xpalx")
+"texture": SubResource("AtlasTexture_p7eqk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_gk6oc")
+"texture": SubResource("AtlasTexture_83oj5")
 }],
 "loop": true,
 "name": &"move",
-"speed": 5.0
+"speed": 3.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2mmdp"]
-size = Vector2(23, 13)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wner2"]
+radius = 6.0
 
-[node name="Madi" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q0rdh"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ujdpa"]
+radius = 9.0
+height = 28.0
+
+[sub_resource type="Animation" id="Animation_ir1um"]
+resource_name = "Death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.733333),
+"transitions": PackedFloat32Array(1, 0.933034),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vskso"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmw2g"]
+_data = {
+"Death": SubResource("Animation_ir1um"),
+"RESET": SubResource("Animation_vskso")
+}
+
+[node name="BearLikeLion" type="CharacterBody2D"]
+collision_layer = 8
+collision_mask = 12
 script = ExtResource("1_hv8sg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_yidro")
+sprite_frames = SubResource("SpriteFrames_rwt8l")
 animation = &"move"
-frame_progress = 0.0182459
+frame_progress = 0.0149926
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_m4vhi")
@@ -46,17 +116,43 @@ initial_state = NodePath("EnemyPatrolling")
 
 [node name="EnemyPatrolling" type="Node" parent="StateMachine"]
 script = ExtResource("3_18ax5")
-speed = Vector2(10, 30)
 
 [node name="EnemyChasing" type="Node" parent="StateMachine"]
 script = ExtResource("4_qcpbg")
-chaseSpeed = 30
+chaseSpeed = 35
 
-[node name="HealthComponent" type="Area2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-1, 5)
+rotation = -1.5708
+shape = SubResource("CircleShape2D_wner2")
+
+[node name="DamageArea" type="Area2D" parent="."]
+collision_layer = 0
+script = ExtResource("6_r5ptl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("RectangleShape2D_q0rdh")
+
+[node name="HurtBox" parent="." node_paths=PackedStringArray("audio") instance=ExtResource("7_s88um")]
 collision_layer = 8
-collision_mask = 5
-script = ExtResource("5_hxk1h")
+MAX_HEALTH = 20.0
+audio = NodePath("AudioStreamPlayer2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HealthComponent"]
-position = Vector2(0.5, -1.5)
-shape = SubResource("RectangleShape2D_2mmdp")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(-1, 3)
+shape = SubResource("CapsuleShape2D_ujdpa")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="HurtBox"]
+stream = ExtResource("8_c1lu5")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+attenuation = 36.7583
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kmw2g")
+}
+
+[connection signal="area_entered" from="DamageArea" to="DamageArea" method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

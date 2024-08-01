@@ -7,6 +7,7 @@ class_name BaseEnemy
 
 var currentKnockback: Vector2 = Vector2.ZERO
 
+@onready var animPlayer: AnimationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,6 +29,12 @@ func _physics_process(delta):
 	move_and_slide()
 
 func die():
+	get_node("StateMachine").queue_free()
+	get_node("DamageArea").queue_free()
+	get_node("HurtBox").queue_free()
+
+	animPlayer.play("Death")
+	await animPlayer.animation_finished
 	queue_free()
 
 func knockback(knockbackForce: float, knockbackDirection: Vector2):
