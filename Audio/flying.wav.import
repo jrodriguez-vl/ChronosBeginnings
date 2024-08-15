@@ -2,13 +2,13 @@
 
 importer="wav"
 type="AudioStreamWAV"
-uid="uid://b05114pencaxt"
-path="res://.godot/imported/swordswing.wav-4f75b90fe23e9be3563d56588395eede.sample"
+uid="uid://ddk0whx8s2ulw"
+path="res://.godot/imported/flying.wav-028f8a921f0e1f74ddd2eb37f2f4d2e0.sample"
 
 [deps]
 
-source_file="res://swordswing.wav"
-dest_files=["res://.godot/imported/swordswing.wav-4f75b90fe23e9be3563d56588395eede.sample"]
+source_file="res://Audio/flying.wav"
+dest_files=["res://.godot/imported/flying.wav-028f8a921f0e1f74ddd2eb37f2f4d2e0.sample"]
 
 [params]
 

@@ -26,6 +26,7 @@ func _physics_process(delta):
 	#TODO: move the velocity from the enemy states to here to apply them all in one place
 	currentKnockback = currentKnockback.move_toward(Vector2.ZERO, knockbackDamping * delta)
 	velocity = currentKnockback
+	print(currentKnockback)
 	move_and_slide()
 
 func die():

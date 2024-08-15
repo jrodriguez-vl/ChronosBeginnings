@@ -42,4 +42,5 @@ func _on_hurt_box_knockback(knockbackForce: float, knockbackDirection: Vector2):
 	currentKnockback = force * knockbackDirection
 
 func _on_hurt_box_damaged(health: float):
+	print('my guy hurt')
 	healthBar.UpdateCurrent(health)
