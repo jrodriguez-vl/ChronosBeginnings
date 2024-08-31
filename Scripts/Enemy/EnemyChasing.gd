@@ -17,15 +17,12 @@ func Update(_delta):
 		audio.play()
 
 	if !target:
-		print("no player found")
 		audio.stop()
 		Transition("EnemyPatrolling")
 		return
 
 	var distance = parentNode.position.distance_to(target.position)
 	if(distance > 100):
-		print(distance)
-		print("too far from player")
 		Transition("EnemyPatrolling")
 		return
 

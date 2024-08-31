@@ -8,6 +8,8 @@ class_name BaseEnemy
 var currentKnockback: Vector2 = Vector2.ZERO
 
 @onready var animPlayer: AnimationPlayer = $AnimationPlayer
+@onready var expOrb: PackedScene = preload("res://Scenes/Accessory/Exp.tscn")
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,13 +28,16 @@ func _physics_process(delta):
 	#TODO: move the velocity from the enemy states to here to apply them all in one place
 	currentKnockback = currentKnockback.move_toward(Vector2.ZERO, knockbackDamping * delta)
 	velocity = currentKnockback
-	print(currentKnockback)
 	move_and_slide()
 
 func die():
 	get_node("StateMachine").queue_free()
 	get_node("DamageArea").queue_free()
 	get_node("HurtBox").queue_free()
+
+	var orb = expOrb.instantiate()
+	orb.global_position = global_position
+	get_parent().add_child(orb)
 
 	animPlayer.play("Death")
 	await animPlayer.animation_finished

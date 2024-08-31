@@ -11,15 +11,18 @@ config_version=5
 [application]
 
 config/name="ChronosBeginnings"
-run/main_scene="res://Scenes/Levels/Cata1.tscn"
+run/main_scene="res://Scenes/GameManagement/MainScene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Scenes/GameManagement/Global.gd"
 
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
-window/size/always_on_top=true
 window/stretch/mode="viewport"
 window/stretch/scale=2.0
 window/stretch/scale_mode="integer"
@@ -73,6 +76,7 @@ attack={
 2d_physics/layer_2="PlayerWeapon"
 2d_physics/layer_3="Terrain"
 2d_physics/layer_4="Enemy"
+2d_physics/layer_5="Pickup"
 
 [rendering]
 

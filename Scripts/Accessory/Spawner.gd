@@ -17,6 +17,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	pass
+
+func spawnRandomRadius(delta: float) -> void:
 	if self.get_child_count() < maxObjects && timeSinceSpawn > spawnCooldownSeconds:
 		var numberToSpawn = burstSpawn
 		while(numberToSpawn > 0):
