@@ -15,6 +15,5 @@ func _ready() -> void:
 		Global.player.get_node("RemoteTransform2D").remote_path = cam.get_path()
 		Global.player.SetActive(true)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass

@@ -50,4 +50,4 @@ func ToggleWeapon(isActive: bool):
 func _on_sword_box_area_entered(area):
 	if area is HealthComponent:
 		var pos = global_position.direction_to(area.global_position)
-		area.TakeDamage(weaponDamage, knockbackForce, pos)
+		area.TakeDamage(weaponDamage + Global.player.strength, knockbackForce, pos)

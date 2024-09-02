@@ -5,6 +5,8 @@ class_name Player
 @export var knockbackDamping: float = 1000
 @export var knockbackResistance: float = 0
 
+var strength = 5
+
 var healthBar: BaseBar
 var expBar: BaseBar
 var healthComponent: HealthComponent
