@@ -5,26 +5,23 @@ class_name Player
 @export var knockbackDamping: float = 1000
 @export var knockbackResistance: float = 0
 
-var strength = 5
+@export var hp = 10
+@export var special = 10
+@export var damage = 1
+@export var defense = 0
+@export var luck = 1
 
 var healthBar: BaseBar
 var expBar: BaseBar
+var levelText: RichTextLabel
 var healthComponent: HealthComponent
+var levelComponent: LevelComponent
 
 var movementAxis: Vector2 = Vector2.ZERO
 var currentKnockback: Vector2 = Vector2.ZERO
 
 signal hit
 
-const WALK_UP = "walk_up"
-const WALK_DOWN = "walk_down"
-const WALK_LEFT = "walk_left"
-const WALK_RIGHT = "walk_right"
-
-const ROLL_UP = "roll_up"
-const ROLL_DOWN = "roll_down"
-const ROLL_LEFT = "roll_left"
-const ROLL_RIGHT = "roll_right"
 
 var active: bool = true
 
@@ -33,8 +30,16 @@ func _ready():
 	healthBar = get_node("PlayerGUI/HealthBar")
 	expBar = get_node("PlayerGUI/ExpBar")
 	healthComponent = get_node("HurtBox")
+	levelText = get_node("PlayerGUI/PlayerLevel")
+	levelComponent = get_node("LevelComponent")
 
+	healthComponent.health = hp
+
+	SetLevel(levelComponent.currentLevel)
 	healthBar.Init(healthComponent.health, healthComponent.health)
+
+func SetLevel(level: int):
+	levelText.text = str(level)
 
 func SetActive(enable: bool):
 	self.visible = enable
@@ -54,4 +59,5 @@ func _on_hurt_box_damaged(health: float):
 
 
 func _on_level_component_level_up() -> void:
+	SetLevel(levelComponent.currentLevel)
 	print("dananana na na na naana")

@@ -5,7 +5,8 @@ class_name BaseWeapon
 @export var swingSpeed: float = 800
 @export var weaponOrigin: Vector2 =  Vector2(0, -8)
 @export var weaponOffset: float = 4
-@export var weaponDamage: float = 5
+@export var weaponDamage: int = 1
+@export var weaponDamageModifier: int = 4
 @export var knockbackForce: float = 200
 @export var audio: AudioStreamPlayer2D
 
@@ -49,5 +50,7 @@ func ToggleWeapon(isActive: bool):
 
 func _on_sword_box_area_entered(area):
 	if area is HealthComponent:
+		var damage = randi_range(weaponDamage, weaponDamageModifier + weaponDamage)
+		damage = damage + Global.player.damage
 		var pos = global_position.direction_to(area.global_position)
-		area.TakeDamage(weaponDamage + Global.player.strength, knockbackForce, pos)
+		area.TakeDamage(damage, knockbackForce, pos)
