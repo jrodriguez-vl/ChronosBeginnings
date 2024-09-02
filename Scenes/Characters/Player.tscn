@@ -21,8 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://bv4ujijmibjyo" path="res://Sprites/character/Character_RollUp.png" id="14_yymdd"]
 [ext_resource type="PackedScene" uid="uid://cj6jk8ekv8gdn" path="res://Scenes/Components/HurtBox.tscn" id="16_wilq4"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerAttack.gd" id="19_5dowv"]
-[ext_resource type="PackedScene" uid="uid://buedt2p2ngxpr" path="res://Scenes/GUI/PlayerGUI.tscn" id="22_by1dr"]
 [ext_resource type="PackedScene" uid="uid://b0y5d64llsjxj" path="res://Scenes/Components/LevelComponent.tscn" id="23_ahpwm"]
+[ext_resource type="PackedScene" uid="uid://buedt2p2ngxpr" path="res://Scenes/GUI/PlayerGUI.tscn" id="23_m5adi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xulij"]
 atlas = ExtResource("3_xeehy")
@@ -490,6 +490,7 @@ size = Vector2(8.4, 9.715)
 radius = 6.0
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["Player"]]
+z_index = 5
 scale = Vector2(1.5, 1.5)
 collision_mask = 5
 script = ExtResource("1_645xq")
@@ -497,6 +498,7 @@ weapon = NodePath("Sword")
 metadata/_edit_group_ = true
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 custom_minimum_size = Vector2(10000, 10000)
 offset_left = -22.16
 offset_top = -59.655
@@ -544,12 +546,13 @@ script = ExtResource("19_5dowv")
 position = Vector2(0, 3.13)
 shape = SubResource("CircleShape2D_qmxe6")
 
-[node name="PlayerGui" parent="." instance=ExtResource("22_by1dr")]
-
 [node name="LevelComponent" parent="." instance=ExtResource("23_ahpwm")]
 expIncrement = 10
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+metadata/Enabled = false
+
+[node name="PlayerGUI" parent="." instance=ExtResource("23_m5adi")]
 
 [connection signal="Damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]
 [connection signal="Knockback" from="HurtBox" to="." method="_on_hurt_box_knockback"]

@@ -14,7 +14,7 @@ var secondsSinceLastCalibration: float
 func Enter():
 	super()
 	recalibrateRoute()
-	target = get_tree().get_first_node_in_group("Player")
+	target = Global.player
 	animation.play("move")
 
 func Update(_delta):
@@ -25,7 +25,7 @@ func patrol(_delta):
 	if secondsSinceLastCalibration > secondsToAdjustPatrolRoute:
 		recalibrateRoute()
 
-	if(target):
+	if(target != null):
 		var distance = parentNode.position.distance_to(target.position)
 		if(distance < 100):
 			Transition("EnemyChasing")

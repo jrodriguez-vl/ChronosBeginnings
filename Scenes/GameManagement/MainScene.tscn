@@ -6,5 +6,3 @@
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_hhwt6")
 startLevel = ExtResource("2_7nh3k")
-
-[node name="Main2D" type="Node2D" parent="."]

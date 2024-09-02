@@ -24,13 +24,19 @@ const ROLL_DOWN = "roll_down"
 const ROLL_LEFT = "roll_left"
 const ROLL_RIGHT = "roll_right"
 
+var active: bool = true
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	healthBar = get_node("PlayerGui/HealthBar")
-	expBar = get_node("PlayerGui/ExpBar")
+	healthBar = get_node("PlayerGUI/HealthBar")
+	expBar = get_node("PlayerGUI/ExpBar")
 	healthComponent = get_node("HurtBox")
 
 	healthBar.Init(healthComponent.health, healthComponent.health)
+
+func SetActive(enable: bool):
+	self.visible = enable
+	Global.playerGui.visible = enable
 
 func _physics_process(delta):
 	currentKnockback = currentKnockback.move_toward(Vector2.ZERO, knockbackDamping * delta)

@@ -4,14 +4,20 @@ class_name MainScene
 @export var startLevel: PackedScene
 
 var levelInstance: Node2D
-@onready var main2D = $Main2D
+@onready var loadingAnimationPlayer: CanvasLayer = preload("res://Scenes/GUI/LoadingAnimationPlayer.tscn").instantiate()
 
 func _ready() -> void:
 	print('loaded main')
 	LoadLevel(startLevel.resource_path)
 	Global.mainScene = self
-	self.add_child(Global.player)
-	Global.player.visible = false
+	Global.player = preload("res://Scenes/Characters/Player.tscn").instantiate()
+	Global.weapon = preload("res://Scenes/Weapons/Sword.tscn").instantiate()
+	Global.player.weapon = Global.weapon
+	Global.playerGui = Global.player.get_node("PlayerGUI")
+
+	Global.player.SetActive(false)
+
+	add_child(Global.player)
 
 
 func UnloadLevel():
@@ -21,17 +27,20 @@ func UnloadLevel():
 
 func LoadLevel(sceneName: String) -> void:
 	UnloadLevel()
-	var res = load(sceneName).instantiate()
+	var level = load(sceneName).instantiate()
 	
-	main2D.add_child(res)
-	levelInstance = res
-	var playerPosition = levelInstance.get_node('Marker2D')
-
-	if(playerPosition):
-		Global.player.global_position = playerPosition.global_position
-		Global.player.visible = true
-
-		var cam = Camera2D.new()
-		levelInstance.add_child(cam)
-		Global.player.get_node("RemoteTransform2D").remote_path = cam.get_path()
+	add_child(level)
+	levelInstance = level
 		
+func SceneTransition(sceneName: String) -> void:
+	print('going to scene transition')
+	add_child(loadingAnimationPlayer)
+	var animPlayer = loadingAnimationPlayer.get_node("AnimationPlayer") as AnimationPlayer
+	animPlayer.play("fade_to_black")
+	await animPlayer.animation_finished
+	#some anim fade out
+	LoadLevel(sceneName)
+	#some anim fade in
+	animPlayer.play("fade_from_black")
+	await animPlayer.animation_finished
+	remove_child(loadingAnimationPlayer)

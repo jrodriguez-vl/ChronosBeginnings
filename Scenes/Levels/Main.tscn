@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dfxsvv1pkepsu"]
 
 [ext_resource type="PackedScene" uid="uid://bix4yxrfu236h" path="res://Scenes/Characters/Player.tscn" id="1_w2wdk"]
-[ext_resource type="PackedScene" uid="uid://b3imk40ub86cv" path="res://Scenes/Characters/enemy/BearLikeLion.tscn" id="7_kylgo"]
+[ext_resource type="PackedScene" uid="uid://b3imk40ub86cv" path="res://Scenes/Enemy/BearLikeLion.tscn" id="7_kylgo"]
 
 [node name="Main" type="Node2D" groups=["Player"]]
 

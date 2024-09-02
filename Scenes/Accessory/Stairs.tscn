@@ -1,16 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://b6cjrenqkdi1x"]
+[gd_scene load_steps=4 format=4 uid="uid://b6cjrenqkdi1x"]
 
 [ext_resource type="Script" path="res://Scripts/Accessory/Stairs.gd" id="1_k4h24"]
+[ext_resource type="PackedScene" uid="uid://dbqv5rj8ig5e4" path="res://Scenes/TileLayers/DungeonTileLayer.tscn" id="2_xpfjj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yfby1"]
 
 [node name="Stairs" type="Node2D"]
 script = ExtResource("1_k4h24")
 
+[node name="DungeonTileLayer" parent="." instance=ExtResource("2_xpfjj")]
+position = Vector2(-15, -13)
+tile_map_data = PackedByteArray("AAAAAP//AQAyAAMAAAAAAAAAAQAyAAQAAAAAAAEAAQAyAAUAAAAAAAIAAQAyAAYAAAABAP//AQAzAAMAAAABAAAAAQAzAAQAAAABAAEAAQAzAAUAAAABAAIAAQAzAAYAAAACAP//AQA0AAMAAAACAAAAAQA0AAQAAAACAAEAAQA0AAUAAAACAAIAAQA0AAYAAAA=")
+
 [node name="StaticBody2D" type="Area2D" parent="."]
 collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(1, 4)
 shape = SubResource("RectangleShape2D_yfby1")
 
 [connection signal="area_entered" from="StaticBody2D" to="." method="_on_static_body_2d_area_entered"]
