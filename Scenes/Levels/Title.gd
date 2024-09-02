@@ -9,5 +9,6 @@ func _on_button_pressed() -> void:
 	StartGame()
 
 func StartGame() -> void:
+	Global.InitGame()
 	Global.mainScene.SceneTransition("res://Scenes/Levels/Cata1.tscn")
 	queue_free()

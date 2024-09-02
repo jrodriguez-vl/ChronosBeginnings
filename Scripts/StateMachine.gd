@@ -27,6 +27,11 @@ func _physics_process(delta):
 	if current_state:
 		current_state.Physics_Update(delta)
 
+func _force_transition(state: State):
+	state.Enter()
+	current_state = state
+
+
 func on_child_transition(state: State, new_state_name: String):
 	if state != current_state:
 		return

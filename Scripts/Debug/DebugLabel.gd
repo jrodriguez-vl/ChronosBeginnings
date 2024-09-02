@@ -6,8 +6,12 @@ func _ready():
 
 func _process(delta):
 	var newText = ""
+	var stateMachine = get_parent().get_node("StateMachine")
+	if !stateMachine:
+		return 
+
 	var textList = [
-		get_parent().get_node("StateMachine").current_state.name,
+		stateMachine.current_state.name,
 	]	
 
 	for item in textList:

@@ -4,6 +4,9 @@ class_name BaseLevel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if !Global.player:
+		return
+
 	var playerPosition = get_node('Marker2D')
 
 	if(playerPosition):
@@ -14,6 +17,3 @@ func _ready() -> void:
 
 		Global.player.get_node("RemoteTransform2D").remote_path = cam.get_path()
 		Global.player.SetActive(true)
-
-func _process(delta: float) -> void:
-	pass

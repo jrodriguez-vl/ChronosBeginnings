@@ -19,9 +19,7 @@ var levelComponent: LevelComponent
 
 var movementAxis: Vector2 = Vector2.ZERO
 var currentKnockback: Vector2 = Vector2.ZERO
-
-signal hit
-
+@onready var animationPlayer: AnimationPlayer = $AnimationPlayer
 
 var active: bool = true
 
@@ -34,6 +32,8 @@ func _ready():
 	levelComponent = get_node("LevelComponent")
 
 	healthComponent.health = hp
+	healthComponent.MAX_HEALTH = hp
+	healthComponent.Died.connect(PlayerDeath)
 
 	SetLevel(levelComponent.currentLevel)
 	healthBar.Init(healthComponent.health, healthComponent.health)
@@ -46,6 +46,8 @@ func SetActive(enable: bool):
 	Global.playerGui.visible = enable
 
 func _physics_process(delta):
+	if !active:
+		return
 	currentKnockback = currentKnockback.move_toward(Vector2.ZERO, knockbackDamping * delta)
 	velocity = currentKnockback
 	move_and_slide()
@@ -60,4 +62,19 @@ func _on_hurt_box_damaged(health: float):
 
 func _on_level_component_level_up() -> void:
 	SetLevel(levelComponent.currentLevel)
-	print("dananana na na na naana")
+	healthComponent.health = healthComponent.MAX_HEALTH
+	healthBar.UpdateCurrent(healthComponent.health)
+
+func PlayerDeath():
+	print('died')
+
+	active = false
+	animationPlayer.play('Death')
+
+	get_node("StateMachine").queue_free()
+
+	await animationPlayer.animation_finished
+
+	Global.mainScene.SceneTransition("res://Scenes/Levels/Title.tscn")
+
+	queue_free()

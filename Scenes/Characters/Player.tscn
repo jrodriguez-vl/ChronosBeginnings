@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://bix4yxrfu236h"]
+[gd_scene load_steps=82 format=3 uid="uid://bix4yxrfu236h"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player.gd" id="1_645xq"]
 [ext_resource type="Script" path="res://Scripts/Debug/DebugLabel.gd" id="2_pysoy"]
@@ -489,6 +489,66 @@ size = Vector2(8.4, 9.715)
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmxe6"]
 radius = 6.0
 
+[sub_resource type="Animation" id="Animation_ir1um"]
+resource_name = "Death"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.733333),
+"transitions": PackedFloat32Array(1, 0.933034),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vskso"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmw2g"]
+_data = {
+"Death": SubResource("Animation_ir1um"),
+"RESET": SubResource("Animation_vskso")
+}
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("weapon") groups=["Player"]]
 z_index = 5
 scale = Vector2(1.5, 1.5)
@@ -553,6 +613,11 @@ expIncrement = 10
 metadata/Enabled = false
 
 [node name="PlayerGUI" parent="." instance=ExtResource("23_m5adi")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kmw2g")
+}
 
 [connection signal="Damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]
 [connection signal="Knockback" from="HurtBox" to="." method="_on_hurt_box_knockback"]
