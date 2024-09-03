@@ -6,6 +6,12 @@ var weapon: BaseWeapon
 var playerGui: CanvasLayer
 var loadingAnimationPlayer: CanvasLayer
 
+var monsterRoster: Array[String] = [
+	"res://Scenes/Enemy/Bat.tscn",
+	"res://Scenes/Enemy/Rat.tscn"
+]
+
+
 func _ready() -> void:
 	loadingAnimationPlayer = preload("res://Scenes/GUI/LoadingAnimationPlayer.tscn").instantiate()
 	mainScene = preload("res://Scenes/GameManagement/MainScene.tscn").instantiate()

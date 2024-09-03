@@ -4,5 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://dfd2ji6bcpifa" path="res://Scenes/Levels/Title.tscn" id="2_7nh3k"]
 
 [node name="MainScene" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_hhwt6")
 startLevel = ExtResource("2_7nh3k")

@@ -61,13 +61,17 @@ func _on_hurt_box_damaged(health: float):
 
 
 func _on_level_component_level_up() -> void:
+	#TODO: Level up sound & maybe animation?
+	#TODO: Stat allocations via gui or static depending on class
 	SetLevel(levelComponent.currentLevel)
+	hp+=5
+	damage+=5
 	healthComponent.health = healthComponent.MAX_HEALTH
 	healthBar.UpdateCurrent(healthComponent.health)
+	
 
 func PlayerDeath():
-	print('died')
-
+	#TODO: Play death sound
 	active = false
 	animationPlayer.play('Death')
 
