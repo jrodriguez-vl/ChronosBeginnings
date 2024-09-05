@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name BaseEnemy
 
+signal MonsterDeath
+
 @export var knockbackResistance: float = 0
 @export var knockbackDamping: float = 1000
 @export var audio: AudioStreamPlayer2D
@@ -41,6 +43,9 @@ func die():
 
 	animPlayer.play("Death")
 	await animPlayer.animation_finished
+
+	MonsterDeath.emit(global_position)
+
 	queue_free()
 
 func knockback(knockbackForce: float, knockbackDirection: Vector2):

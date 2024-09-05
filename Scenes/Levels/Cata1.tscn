@@ -4,14 +4,14 @@
 [ext_resource type="PackedScene" uid="uid://dbqv5rj8ig5e4" path="res://Scenes/TileLayers/DungeonTileLayer.tscn" id="2_cdfid"]
 
 [sub_resource type="Curve2D" id="Curve2D_i08rj"]
-bake_interval = 1.0
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 513.458, -14.0233, 0, 0, 0, 0, 513.458, -14.0233, 0, 0, 0, 0, 537.433, 325.651, 0, 0, 0, 0, 600.367, 20.2558, 0, 0, 0, 0, 635.33, 303.837, 0, 0, 0, 0, 693.269, 68.5581, 0, 0, 0, 0, 716.245, 297.605, 0, 0, 0, 0, 778.179, 49.8605, 0, 0, 0, 0, 820.135, 268, 0, 0, 0, 0, 863.09, 0, 0, 0, 0, 0, 900.051, 320.977)
+"points": PackedVector2Array(0, 0, 0, 0, 499.476, 12.8858, 0, 0, 0, 0, 512.462, 318.281, 0, 0, 0, 0, 571.4, 90.7928, 0, 0, 0, 0, 603.366, 322.956, 0, 0, 0, 0, 644.323, 86.1184, 0, 0, 0, 0, 690.275, 319.839, 0, 0, 0, 0, 743.22, 90.7928, 0, 0, 0, 0, 788.172, 307.374, 0, 0, 0, 0, 849.108, 86.1184, 0, 0, 0, 0, 896.059, 276.211, 0, 0, 0, 0, 914.04, 8.21138, 0, 0, 0, 0, 499.476, 12.8858)
 }
-point_count = 11
+point_count = 12
 
 [node name="Cata1" type="Node2D"]
 script = ExtResource("1_41a3p")
+nextLevel = "res://Scenes/Levels/Cata2.tscn"
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -28,10 +28,11 @@ tile_map_data = PackedByteArray("AAARAAMAAQAEAAgAAAARAAQAAQAEAAkAAAARAAUAAQAEAAo
 position = Vector2(364, 153)
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2(0, 120)
+position = Vector2(0, 124.73)
 scale = Vector2(1.00105, 0.641791)
 curve = SubResource("Curve2D_i08rj")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(513.454, -14.0842)
+position = Vector2(499.476, 12.8858)
+rotation = 1.5283
 loop = false

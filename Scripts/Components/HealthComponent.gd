@@ -40,7 +40,7 @@ func TakeDamage(dmg: float, knockbackForce: float, knockbackDirection: Vector2):
 
 	var num = damageFloaty.instantiate()
 	num.SetDamage(dmg)
-	add_child(num)
+	get_parent().call_deferred('add_child', num)
 	
 	Knockback.emit(knockbackForce, knockbackDirection)
 	Damaged.emit(health)

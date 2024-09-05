@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b3imk40ub86cv"]
+[gd_scene load_steps=17 format=3 uid="uid://b3imk40ub86cv"]
 
 [ext_resource type="Script" path="res://Scripts/Enemy/BaseEnemy.gd" id="1_dkbct"]
 [ext_resource type="Texture2D" uid="uid://dntyrpcegt4ho" path="res://Sprites/enemies/bear_like_lion.png" id="2_cppgk"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Scripts/Weapon/AuraWeapon.gd" id="7_7ncwl"]
 [ext_resource type="AudioStream" uid="uid://bls6celfvj2xk" path="res://Audio/wetslap.wav" id="8_8andb"]
 [ext_resource type="AudioStream" uid="uid://bkovwefubdmrh" path="res://Audio/cheeksclappin.wav" id="8_ti7ln"]
+[ext_resource type="PackedScene" uid="uid://dd8we6xf4i5x2" path="res://Scenes/Animations/DeathAnimation.tscn" id="10_1d5oe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4843w"]
 atlas = ExtResource("2_cppgk")
@@ -40,66 +41,6 @@ radius = 6.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ujdpa"]
 radius = 9.0
 height = 28.0
-
-[sub_resource type="Animation" id="Animation_ir1um"]
-resource_name = "Death"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.5708]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.733333),
-"transitions": PackedFloat32Array(1, 0.933034),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_vskso"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:self_modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_kmw2g"]
-_data = {
-"Death": SubResource("Animation_ir1um"),
-"RESET": SubResource("Animation_vskso")
-}
 
 [node name="BearLikeLion" type="CharacterBody2D"]
 collision_layer = 8
@@ -151,10 +92,6 @@ stream = ExtResource("8_8andb")
 stream = ExtResource("8_ti7ln")
 attenuation = 36.7583
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_kmw2g")
-}
+[node name="AnimationPlayer" parent="." instance=ExtResource("10_1d5oe")]
 
 [connection signal="area_entered" from="DamageArea" to="DamageArea" method="_on_area_entered"]
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
