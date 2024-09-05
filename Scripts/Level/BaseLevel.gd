@@ -9,15 +9,20 @@ class_name BaseLevel
 @onready var monsters: Array[BaseEnemy]
 
 var monstersKilled = 0
+var canPause = false
 
 func _ready() -> void:
 	if !Global.player:
 		return
 
+	stairs.level = self
+	stairs.nextLevel = nextLevel
+	
+	pause.level = self
+	add_child(pause)
+
 	var path: Path2D = $Path2D
 	var pathFollow: PathFollow2D
-
-	stairs.nextLevel = nextLevel
 
 	var playerPosition = get_node('Marker2D')
 	pathFollow = path.get_node("PathFollow2D")
@@ -31,7 +36,6 @@ func _ready() -> void:
 		Global.player.get_node("RemoteTransform2D").remote_path = cam.get_path()
 		Global.player.SetActive(true)
 
-	add_child(pause)
 	
 	var toTake = 0
 	while toTake < monstersToSpawn:
@@ -43,9 +47,11 @@ func _ready() -> void:
 		add_child(monsterInstance)
 
 		toTake+=1
+		pathFollow.progress_ratio = 1.0/monstersToSpawn * toTake
 
 	
 	monsters.pick_random().MonsterDeath.connect(SpawnStaircase)
+	canPause = true
 		
 
 func SpawnStaircase(monsterPosition: Vector2) -> void:

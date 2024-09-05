@@ -1,7 +1,9 @@
 extends Node2D
 
+var level: BaseLevel
+
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause"):
+	if level.canPause && Input.is_action_just_pressed("pause"):
 		var isPausing = !get_tree().paused
 		TogglePause(isPausing)
 		

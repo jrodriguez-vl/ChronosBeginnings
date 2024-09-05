@@ -12,6 +12,7 @@ point_count = 19
 [node name="Cata2" type="Node2D"]
 script = ExtResource("1_5y41g")
 nextLevel = "res://Scenes/Levels/Cata3.tscn"
+monstersToSpawn = 12
 
 [node name="Map" type="Node2D" parent="."]
 
