@@ -21,9 +21,6 @@ func _ready():
 	invulTimer = get_node("InvulTimer")
 	invulTimer.wait_time = invulnerabilityTime
 
-func _process(delta):
-	pass
-
 func TakeDamage(dmg: float, knockbackForce: float, knockbackDirection: Vector2):
 	if audio:
 		audio.play()

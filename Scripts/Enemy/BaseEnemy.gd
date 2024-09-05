@@ -22,10 +22,6 @@ func _ready():
 			child.Knockback.connect(knockback)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _physics_process(delta):
 	#TODO: move the velocity from the enemy states to here to apply them all in one place
 	currentKnockback = currentKnockback.move_toward(Vector2.ZERO, knockbackDamping * delta)
@@ -39,7 +35,7 @@ func die():
 
 	var orb = expOrb.instantiate()
 	orb.global_position = global_position
-	get_parent().add_child(orb)
+	get_parent().call_deferred('add_child', orb)
 
 	animPlayer.play("Death")
 	await animPlayer.animation_finished

@@ -4,7 +4,7 @@ extends Label
 func _ready():
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(_delta):
 	var newText = ""
 	var stateMachine = get_parent().get_node("StateMachine")
 	if !stateMachine:

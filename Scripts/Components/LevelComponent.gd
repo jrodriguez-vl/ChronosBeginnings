@@ -14,11 +14,8 @@ func _ready() -> void:
 	currentLevel = 1
 	expToLevel += expIncrement
 
-func _process(delta: float) -> void:
-	pass
-
-func AddExp(exp: int):
-	currentExp += exp
+func AddExp(addedExp: int):
+	currentExp += addedExp
 	print(currentExp)
 
 	if currentExp >= expToLevel:
