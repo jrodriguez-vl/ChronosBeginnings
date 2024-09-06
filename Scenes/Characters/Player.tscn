@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://bix4yxrfu236h"]
+[gd_scene load_steps=83 format=3 uid="uid://bix4yxrfu236h"]
 
 [ext_resource type="Script" path="res://Scenes/Characters/Player.gd" id="1_645xq"]
 [ext_resource type="Script" path="res://Scripts/Debug/DebugLabel.gd" id="2_pysoy"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerAttack.gd" id="19_5dowv"]
 [ext_resource type="PackedScene" uid="uid://b0y5d64llsjxj" path="res://Scenes/Components/LevelupComponent.tscn" id="23_ahpwm"]
 [ext_resource type="PackedScene" uid="uid://buedt2p2ngxpr" path="res://Scenes/GUI/PlayerGUI.tscn" id="23_m5adi"]
+[ext_resource type="PackedScene" uid="uid://cca0m7it1dx6k" path="res://Scenes/Components/Magnet.tscn" id="24_p6ko7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xulij"]
 atlas = ExtResource("3_xeehy")
@@ -618,6 +619,8 @@ libraries = {
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position_smoothing_enabled = true
+
+[node name="Magnet" parent="." instance=ExtResource("24_p6ko7")]
 
 [connection signal="Damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]
 [connection signal="Knockback" from="HurtBox" to="." method="_on_hurt_box_knockback"]
