@@ -1,0 +1,112 @@
+[gd_scene load_steps=5 format=3 uid="uid://eabh4k40d335"]
+
+[ext_resource type="AudioStream" uid="uid://cxllx7gcmqwqy" path="res://Audio/levelupsound.mp3" id="1_7prsf"]
+
+[sub_resource type="Animation" id="Animation_ra6m5"]
+resource_name = "SlideUp"
+length = 1.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.210224, 10.5561),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -60)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.0457771, 0.633474, 0.694178, 1), Color(0.592786, 0.479122, 0.871168, 1), Color(0.744989, 0.469318, 0.531171, 1), Color(0.72325, 0.506236, 0.351177, 1), Color(0.470364, 0.611483, 0.370582, 1), Color(0.329412, 0.619608, 0.596078, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "audio"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("1_7prsf")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/3/use_blend = true
+
+[sub_resource type="Animation" id="Animation_jhvqu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0457771, 0.633474, 0.694178, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5dyx0"]
+_data = {
+"RESET": SubResource("Animation_jhvqu"),
+"SlideUp": SubResource("Animation_ra6m5")
+}
+
+[node name="LevelUpNotification" type="Node2D"]
+position = Vector2(-29, -24)
+scale = Vector2(0.155, 0.155)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+modulate = Color(0.0457771, 0.633474, 0.694178, 1)
+offset_right = 415.0
+offset_bottom = 139.0
+theme_override_font_sizes/normal_font_size = 100
+text = "Level Up"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5dyx0")
+}
+autoplay = "SlideUp"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

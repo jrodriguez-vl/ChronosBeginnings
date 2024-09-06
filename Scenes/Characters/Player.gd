@@ -20,6 +20,7 @@ var levelupComponent: LevelupComponent
 var movementAxis: Vector2 = Vector2.ZERO
 var currentKnockback: Vector2 = Vector2.ZERO
 @onready var animationPlayer: AnimationPlayer = $AnimationPlayer
+@onready var LevelUpNotification: PackedScene = preload('res://Scenes/Accessory/LevelUpNotification.tscn')
 
 var active: bool = true
 
@@ -61,15 +62,17 @@ func _on_hurt_box_damaged(health: float):
 
 
 func _on_level_component_level_up() -> void:
-	#TODO: Level up sound & maybe animation?
+	var levNot = LevelUpNotification.instantiate()
+	add_child(levNot)
+
 	#TODO: Stat allocations via gui or static depending on class
 	SetLevel(levelupComponent.currentLevel)
+
 	hp+=5
 	damage+=5
 	healthComponent.health = healthComponent.MAX_HEALTH
 	healthBar.UpdateCurrent(healthComponent.health)
 	
-
 func PlayerDeath():
 	#TODO: Play death sound
 	active = false
