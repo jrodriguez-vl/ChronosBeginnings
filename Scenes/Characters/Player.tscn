@@ -21,7 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://bv4ujijmibjyo" path="res://Sprites/character/Character_RollUp.png" id="14_yymdd"]
 [ext_resource type="PackedScene" uid="uid://cj6jk8ekv8gdn" path="res://Scenes/Components/HurtBox.tscn" id="16_wilq4"]
 [ext_resource type="Script" path="res://Scripts/Player/States/PlayerAttack.gd" id="19_5dowv"]
-[ext_resource type="PackedScene" uid="uid://b0y5d64llsjxj" path="res://Scenes/Components/LevelComponent.tscn" id="23_ahpwm"]
+[ext_resource type="PackedScene" uid="uid://b0y5d64llsjxj" path="res://Scenes/Components/LevelupComponent.tscn" id="23_ahpwm"]
 [ext_resource type="PackedScene" uid="uid://buedt2p2ngxpr" path="res://Scenes/GUI/PlayerGUI.tscn" id="23_m5adi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xulij"]
@@ -609,15 +609,15 @@ shape = SubResource("CircleShape2D_qmxe6")
 [node name="LevelComponent" parent="." instance=ExtResource("23_ahpwm")]
 expIncrement = 10
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
-metadata/Enabled = false
-
 [node name="PlayerGUI" parent="." instance=ExtResource("23_m5adi")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_kmw2g")
 }
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
 
 [connection signal="Damaged" from="HurtBox" to="." method="_on_hurt_box_damaged"]
 [connection signal="Knockback" from="HurtBox" to="." method="_on_hurt_box_knockback"]

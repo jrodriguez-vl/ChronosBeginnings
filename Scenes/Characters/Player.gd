@@ -15,7 +15,7 @@ var healthBar: BaseBar
 var expBar: BaseBar
 var levelText: RichTextLabel
 var healthComponent: HealthComponent
-var levelComponent: LevelComponent
+var levelupComponent: LevelupComponent
 
 var movementAxis: Vector2 = Vector2.ZERO
 var currentKnockback: Vector2 = Vector2.ZERO
@@ -29,13 +29,13 @@ func _ready():
 	expBar = get_node("PlayerGUI/ExpBar")
 	healthComponent = get_node("HurtBox")
 	levelText = get_node("PlayerGUI/PlayerLevel")
-	levelComponent = get_node("LevelComponent")
+	levelupComponent = get_node("LevelComponent")
 
 	healthComponent.health = hp
 	healthComponent.MAX_HEALTH = hp
 	healthComponent.Died.connect(PlayerDeath)
 
-	SetLevel(levelComponent.currentLevel)
+	SetLevel(levelupComponent.currentLevel)
 	healthBar.Init(healthComponent.health, healthComponent.health)
 
 func SetLevel(level: int):
@@ -63,7 +63,7 @@ func _on_hurt_box_damaged(health: float):
 func _on_level_component_level_up() -> void:
 	#TODO: Level up sound & maybe animation?
 	#TODO: Stat allocations via gui or static depending on class
-	SetLevel(levelComponent.currentLevel)
+	SetLevel(levelupComponent.currentLevel)
 	hp+=5
 	damage+=5
 	healthComponent.health = healthComponent.MAX_HEALTH

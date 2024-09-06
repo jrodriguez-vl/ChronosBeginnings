@@ -1,18 +1,18 @@
-[gd_scene load_steps=4 format=4 uid="uid://y4mwwx6r33sp"]
+[gd_scene load_steps=6 format=4 uid="uid://y4mwwx6r33sp"]
 
 [ext_resource type="Script" path="res://Scripts/Level/BaseLevel.gd" id="1_5y41g"]
 [ext_resource type="PackedScene" uid="uid://dbqv5rj8ig5e4" path="res://Scenes/TileLayers/DungeonTileLayer.tscn" id="2_rropf"]
+[ext_resource type="PackedScene" uid="uid://cy2c6n5yfco6s" path="res://Scenes/Components/StairProgression.tscn" id="3_bh1j4"]
+[ext_resource type="PackedScene" uid="uid://dhmie5iosf2l3" path="res://Scenes/Components/MonsterSpawn.tscn" id="4_7orb7"]
 
-[sub_resource type="Curve2D" id="Curve2D_qy4a3"]
+[sub_resource type="Curve2D" id="Curve2D_lwwlw"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 349, 141, 0, 0, 0, 0, 341, 320, 0, 0, 0, 0, 451, 356, 0, 0, 0, 0, 355, 415, 0, 0, 0, 0, 459, 465, 0, 0, 0, 0, 353, 522, 0, 0, 0, 0, 596, 497, 0, 0, 0, 0, 518, 386, 0, 0, 0, 0, 558, 347, 0, 0, 0, 0, 641, 389, 0, 0, 0, 0, 673, 513, 0, 0, 0, 0, 765, 517, 0, 0, 0, 0, 887, 513, 0, 0, 0, 0, 940, 442, 0, 0, 0, 0, 930, 276, 0, 0, 0, 0, 946, 173, 0, 0, 0, 0, 830, 255, 0, 0, 0, 0, 774, 173, 0, 0, 0, 0, 658, 279)
+"points": PackedVector2Array(0, 0, 0, 0, 582, 131, 0, 0, 0, 0, 350, 130, 0, 0, 0, 0, 341, 366, 0, 0, 0, 0, 337, 516, 0, 0, 0, 0, 437, 357, 0, 0, 0, 0, 497, 498, 0, 0, 0, 0, 564, 349, 0, 0, 0, 0, 648, 355, 0, 0, 0, 0, 621, 478, 0, 0, 0, 0, 693, 512, 0, 0, 0, 0, 879, 506, 0, 0, 0, 0, 935, 505, 0, 0, 0, 0, 939, 146, 0, 0, 0, 0, 855, 283, 0, 0, 0, 0, 815, 138, 0, 0, 0, 0, 711, 291, 0, 0, 0, 0, 638, 260)
 }
-point_count = 19
+point_count = 17
 
 [node name="Cata2" type="Node2D"]
 script = ExtResource("1_5y41g")
-nextLevel = "res://Scenes/Levels/Cata3.tscn"
-monstersToSpawn = 12
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -31,9 +31,8 @@ tile_map_data = PackedByteArray("AAARAAMAAQAEAAgAAAARAAQAAQAEAAkAAAARAAUAAQAEAAo
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(648, 141)
 
-[node name="Path2D" type="Path2D" parent="."]
-curve = SubResource("Curve2D_qy4a3")
+[node name="LevelProgress" parent="." instance=ExtResource("3_bh1j4")]
+nextLevel = "res://Scenes/Levels/Cata3.tscn"
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(349, 141)
-rotation = 1.61546
+[node name="MonsterSpawn" parent="." instance=ExtResource("4_7orb7")]
+curve = SubResource("Curve2D_lwwlw")

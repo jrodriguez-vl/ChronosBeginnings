@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dhmie5iosf2l3"]
+
+[ext_resource type="Script" path="res://Scripts/Components/MonsterSpawn.gd" id="1_maura"]
+
+[node name="MonsterSpawn" type="Path2D"]
+script = ExtResource("1_maura")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]

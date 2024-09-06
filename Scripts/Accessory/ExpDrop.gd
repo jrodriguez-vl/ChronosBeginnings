@@ -10,6 +10,6 @@ func _ready() -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	var component = area.get_parent().get_node("LevelComponent")
 
-	if component is LevelComponent:
+	if component is LevelupComponent:
 		component.AddExp(expAmount)
 		queue_free()

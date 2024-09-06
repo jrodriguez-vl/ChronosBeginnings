@@ -1,5 +1,5 @@
 extends Node2D
-class_name LevelComponent
+class_name LevelupComponent
 
 signal LevelUp
 

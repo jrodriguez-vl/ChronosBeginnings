@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=4 uid="uid://dj0an7fcadrge"]
+[gd_scene load_steps=6 format=4 uid="uid://dj0an7fcadrge"]
 
 [ext_resource type="Script" path="res://Scripts/Level/BaseLevel.gd" id="1_41a3p"]
 [ext_resource type="PackedScene" uid="uid://dbqv5rj8ig5e4" path="res://Scenes/TileLayers/DungeonTileLayer.tscn" id="2_cdfid"]
+[ext_resource type="PackedScene" uid="uid://dhmie5iosf2l3" path="res://Scenes/Components/MonsterSpawn.tscn" id="3_4frsw"]
+[ext_resource type="PackedScene" uid="uid://cy2c6n5yfco6s" path="res://Scenes/Components/StairProgression.tscn" id="4_opyii"]
 
-[sub_resource type="Curve2D" id="Curve2D_i08rj"]
+[sub_resource type="Curve2D" id="Curve2D_ducc0"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 499.476, 12.8858, 0, 0, 0, 0, 512.462, 318.281, 0, 0, 0, 0, 571.4, 90.7928, 0, 0, 0, 0, 603.366, 322.956, 0, 0, 0, 0, 644.323, 86.1184, 0, 0, 0, 0, 690.275, 319.839, 0, 0, 0, 0, 743.22, 90.7928, 0, 0, 0, 0, 788.172, 307.374, 0, 0, 0, 0, 849.108, 86.1184, 0, 0, 0, 0, 896.059, 276.211, 0, 0, 0, 0, 914.04, 8.21138, 0, 0, 0, 0, 499.476, 12.8858)
+"points": PackedVector2Array(0, 0, 0, 0, 590, 161, 0, 0, 0, 0, 605, 306, 0, 0, 0, 0, 688, 206, 0, 0, 0, 0, 746, 305, 0, 0, 0, 0, 834, 192, 0, 0, 0, 0, 910, 307, 0, 0, 0, 0, 948, 147, 0, 0, 0, 0, 590, 161)
 }
-point_count = 12
+point_count = 8
 
 [node name="Cata1" type="Node2D"]
 script = ExtResource("1_41a3p")
-nextLevel = "res://Scenes/Levels/Cata2.tscn"
 
 [node name="Map" type="Node2D" parent="."]
 
@@ -27,12 +28,8 @@ tile_map_data = PackedByteArray("AAARAAMAAQAEAAgAAAARAAQAAQAEAAkAAAARAAUAAQAEAAo
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(364, 153)
 
-[node name="Path2D" type="Path2D" parent="."]
-position = Vector2(0, 124.73)
-scale = Vector2(1.00105, 0.641791)
-curve = SubResource("Curve2D_i08rj")
+[node name="MonsterSpawn" parent="." instance=ExtResource("3_4frsw")]
+curve = SubResource("Curve2D_ducc0")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
-position = Vector2(499.476, 12.8858)
-rotation = 1.5283
-loop = false
+[node name="LevelProgress" parent="." instance=ExtResource("4_opyii")]
+nextLevel = "res://Scenes/Levels/Cata2.tscn"
