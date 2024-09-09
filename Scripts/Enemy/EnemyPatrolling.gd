@@ -27,11 +27,10 @@ func patrol(_delta):
 
 	if(target != null):
 		var distance = parentNode.position.distance_to(target.position)
-		if(distance < 100):
+		if(distance < 100 || Global.EnemiesAlwaysChase):
 			Transition("EnemyChasing")
 			return
 
-	#will need to flip animation if x < 0
 	var moveDirection = Vector2(xMov, yMov)
 	determineAnimationFlip()
 	parentNode.position += moveDirection * moveSpeed * _delta

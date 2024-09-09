@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=4 uid="uid://dj0an7fcadrge"]
+[gd_scene load_steps=6 format=4 uid="uid://dj0an7fcadrge"]
 
 [ext_resource type="Script" path="res://Scripts/Level/BaseLevel.gd" id="1_41a3p"]
 [ext_resource type="PackedScene" uid="uid://dbqv5rj8ig5e4" path="res://Scenes/TileLayers/DungeonTileLayer.tscn" id="2_cdfid"]
 [ext_resource type="PackedScene" uid="uid://dhmie5iosf2l3" path="res://Scenes/Components/MonsterSpawn.tscn" id="3_4frsw"]
 [ext_resource type="PackedScene" uid="uid://cy2c6n5yfco6s" path="res://Scenes/Components/StairProgression.tscn" id="4_opyii"]
-[ext_resource type="PackedScene" uid="uid://d014x1d85xskt" path="res://Scenes/Accessory/Exp.tscn" id="5_ogdd4"]
 
 [sub_resource type="Curve2D" id="Curve2D_ducc0"]
 _data = {
@@ -34,6 +33,3 @@ curve = SubResource("Curve2D_ducc0")
 
 [node name="LevelProgress" parent="." instance=ExtResource("4_opyii")]
 nextLevel = "res://Scenes/Levels/Cata2.tscn"
-
-[node name="Exp" parent="." instance=ExtResource("5_ogdd4")]
-position = Vector2(529, 323)

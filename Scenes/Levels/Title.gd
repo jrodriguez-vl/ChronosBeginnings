@@ -10,5 +10,6 @@ func _on_button_pressed() -> void:
 
 func StartGame() -> void:
 	Global.InitGame()
-	Global.mainScene.SceneTransition("res://Scenes/Levels/Cata1.tscn")
+	# Global.mainScene.SceneTransition("res://Scenes/Levels/Cata1.tscn")
+	Global.mainScene.SceneTransition("res://Scenes/Levels/Endless.tscn")
 	queue_free()

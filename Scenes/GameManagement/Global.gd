@@ -5,6 +5,7 @@ var player: Player
 var weapon: BaseWeapon
 var playerGui: CanvasLayer
 var loadingAnimationPlayer: CanvasLayer
+var EnemiesAlwaysChase: bool = false
 
 var monsterRoster: Array[String] = [
 	"res://Scenes/Enemy/Bat.tscn",
