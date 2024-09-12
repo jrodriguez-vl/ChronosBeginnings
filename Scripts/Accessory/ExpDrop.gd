@@ -12,7 +12,7 @@ var moveTowardsPlayer = false
 
 
 func _process(delta: float) -> void:
-	if moveTowardsPlayer && Global.player:
+	if moveTowardsPlayer && is_instance_valid(Global.player):
 		var movement = area.global_position.direction_to(Global.player.global_position) * minf(speed, maxSpeed)
 		global_position += movement * delta
 		speed = speed * speedMagnifier

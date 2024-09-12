@@ -5,11 +5,27 @@ class_name Player
 @export var knockbackDamping: float = 1000
 @export var knockbackResistance: float = 0
 
-@export var hp = 10
-@export var special = 10
-@export var damage = 1
-@export var defense = 0
-@export var luck = 1
+var hp: 
+	get: return _stats[StatType.HP]
+var special: 
+	get: return _stats[StatType.SPECIAL]
+var damage: 
+	get: return _stats[StatType.DAMAGE]
+var defense: 
+	get: return _stats[StatType.DEFENSE]
+var luck: 
+	get: return _stats[StatType.LUCK]
+
+
+enum StatType { HP, SPECIAL, DAMAGE, DEFENSE, LUCK }
+
+var _stats: Dictionary = {
+	StatType.HP: 10,
+	StatType.SPECIAL: 10,
+	StatType.DAMAGE: 100,
+	StatType.DEFENSE: 0,
+	StatType.LUCK: 1,
+}
 
 var healthBar: BaseBar
 var expBar: BaseBar
@@ -38,6 +54,11 @@ func _ready():
 
 	SetLevel(levelupComponent.currentLevel)
 	healthBar.Init(healthComponent.health, healthComponent.health)
+
+
+func set_stats(updated_stats: Dictionary):
+	_stats = updated_stats
+	
 
 func SetLevel(level: int):
 	levelText.text = str(level)
@@ -75,8 +96,13 @@ func _on_level_component_level_up() -> void:
 	
 func PlayerDeath():
 	#TODO: Play death sound
+	$HurtBox.queue_free()
+	$CollisionShape2D.queue_free()
+	$Magnet.queue_free()
 	active = false
 	animationPlayer.play('Death')
+
+
 
 	get_node("StateMachine").queue_free()
 

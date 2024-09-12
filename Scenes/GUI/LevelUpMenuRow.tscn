@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://bip8gaoagg0k3"]
+
+[ext_resource type="Script" path="res://Scenes/GUI/LevelUpMenuRow.gd" id="1_tyion"]
+
+[node name="LevelUpMenuRow" type="HBoxContainer"]
+script = ExtResource("1_tyion")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Damage"
+
+[node name="CurrentStatLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "|current|"
+
+[node name="ToAddLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "0"
+
+[node name="MinusButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "-"
+
+[node name="PlusButton" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+text = "+"
